@@ -1,10 +1,10 @@
-const express = require("express")
+const express = require("express");
 const router = new express.Router();
-const MensSprintRank = require("../models/menssprint");
+const MensRank = require("../models/mens");
 
-router.post("/menssprint", async (req, res) => {
+router.post("/mens", async (req, res) => {
   try {
-    const addingRecords = new MensSprintRank(req.body);
+    const addingRecords = new MensRank(req.body);
 
     console.log(req.body);
 
@@ -18,9 +18,9 @@ router.post("/menssprint", async (req, res) => {
 });
 
 // Handling get request
-router.get("/menssprint", async (req, res) => {
+router.get("/mens", async (req, res) => {
   try {
-    const getRecords = await MensSprintRank.find({}).sort({"ranking":1})
+    const getRecords = await MensRank.find({}).sort({ ranking: 1 });
     res.send(getRecords);
 
     // Because save returns us a promise
@@ -29,12 +29,11 @@ router.get("/menssprint", async (req, res) => {
   }
 });
 
-// Handling get request with specific id 
-router.get("/menssprint/:id", async (req, res) => {
+// Handling get request with specific id
+router.get("/mens/:id", async (req, res) => {
   try {
-
     const _id = req.params.id;
-    const getRecord = await MensSprintRank.findById({_id}) //document with provided id which is _id:_id
+    const getRecord = await MensRank.findById({ _id }); //document with provided id which is _id:_id
     res.send(getRecord);
 
     // Because save returns us a promise
@@ -44,13 +43,12 @@ router.get("/menssprint/:id", async (req, res) => {
 });
 
 // Handling updating record with the help of patch where we are using patch because we are targeting individual data
-router.patch("/menssprint/:id", async (req, res) => {
+router.patch("/mens/:id", async (req, res) => {
   try {
-
     const _id = req.params.id;
-    const getRecord = await MensSprintRank.findByIdAndUpdate(_id,req.body,{
-      new:true
-    }) //document with provided id which is _id:_id
+    const getRecord = await MensRank.findByIdAndUpdate(_id, req.body, {
+      new: true,
+    }); //document with provided id which is _id:_id
     res.send(getRecord);
 
     // Because save returns us a promise
@@ -60,11 +58,10 @@ router.patch("/menssprint/:id", async (req, res) => {
 });
 
 // Handling delete request using individual id
-router.delete("/menssprint/:id", async (req, res) => {
+router.delete("/mens/:id", async (req, res) => {
   try {
-
     const _id = req.params.id;
-    const getRecord = await MensSprintRank.findByIdAndDelete(_id) //document with provided id which is _id:_id
+    const getRecord = await MensRank.findByIdAndDelete(_id); //document with provided id which is _id:_id
     res.send(getRecord);
 
     // Because save returns us a promise
@@ -73,4 +70,4 @@ router.delete("/menssprint/:id", async (req, res) => {
   }
 });
 
-module.exports = router
+module.exports = router;

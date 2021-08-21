@@ -28,12 +28,12 @@ const mensSchema = mongoose.Schema({
   },
   event: {
     type: String,
-    default: "100m",
+    required: true,
+    trim: true,
   },
 });
 
 // Creating our collection
-const MensSprintRank = new mongoose.model("MenSprintRank", mensSchema);
+const MensRank = new mongoose.model("MenRank", mensSchema);
 
-
-module.exports = MensSprintRank;
+module.exports = MensRank;
